@@ -34,6 +34,8 @@ Template.registration.events({
         }, function(error){
             if (error){
                 console.log(error)
+            } else {
+                $('#registration-modal').modal('hide');
             }
         });
     }
