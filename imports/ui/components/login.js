@@ -10,6 +10,8 @@ Template.loginButton.events({
         Meteor.loginWithPassword(email, password, function(error){
           if(error){
             Session.set('loginErrorMessage', "Email and/or password are invalid");
+          } else {
+            delete Session.keys['loginErrorMessage'];
           }
         });
     },

@@ -25,3 +25,5 @@ less
 nemo64:bootstrap
 themeteorchef:jquery-validation
 session
+kadira:flow-router
+kadira:blaze-layout

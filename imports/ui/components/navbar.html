@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Brand</a>
+                <a class="navbar-brand" href="/">RPG Centre</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -38,7 +38,7 @@
                 </form>
                 <ul class="nav navbar-nav navbar-right">
                     {{#if currentUser}}
-                        <li><a href="#" class="logout">Logout</a></li>
+                        {{> userNavButton}}
                     {{else}}
                         <li><a href="#" data-toggle="modal" data-target="#registration-modal">Sign Up</a></li>
                         {{> loginButton}}
