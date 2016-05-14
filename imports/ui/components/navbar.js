@@ -3,6 +3,7 @@ import { Template } from 'meteor/templating';
 import './login.js';
 import './register.js';
 import './usernavbutton.js';
+
 import './navbar.html';
 
 Template.navbar.events({
