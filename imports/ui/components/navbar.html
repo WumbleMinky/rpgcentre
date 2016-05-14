@@ -12,24 +12,37 @@
                 <a class="navbar-brand" href="/">RPG Centre</a>
             </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="/">Home <span class="sr-only">(current)</span></a></li>
-                    <li><a href="/about">About</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    {{#if currentUser}}
-                        {{> userNavButton}}
-                    {{else}}
-                        <li><a href="#" data-toggle="modal" data-target="#registration-modal">Sign Up</a></li>
-                        {{> loginButton}}
-                    {{/if}}
-                </ul>
+                {{#if currentUser}}
+                    {{> navbar_logged_in}}
+                {{else}}
+                    {{> navbar_public}}
+                {{/if}}
             </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container-fluid -->
     </nav>
+</template>
+
+<template name="navbar_public">
+    <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home <span class="sr-only">(current)</span></a></li>
+        <li><a href="/about">About</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="#" data-toggle="modal" data-target="#registration-modal">Sign Up</a></li>
+        {{> loginButton}}
+    </ul>
     {{> registration}}
+</template>
+
+<template name="navbar_logged_in">
+    <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Campaigns</a></li>
+        <li><a href="#">Characters</a></li>
+        <li><a href="#">Monsters</a></li>
+        <li><a href="#">Tools</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        {{> userNavButton}}
+    </ul>
 </template>
