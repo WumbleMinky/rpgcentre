@@ -1,3 +1,103 @@
 <template name="user_dashboard">
-    This is the user dashboard!
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Campaigns</h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list-unstyled">
+                            <li title="Currently on Pause">Attack on Valeholm</li>
+                            <li>Wrath of Domescus</li>
+                            <li>The World Ender <span class="label label-primary">DM</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Characters</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr>
+                                <th>Name</th>
+                                <th>Class</th>
+                                <th>Level</th>
+                                <th>Current Campaign</th>
+                                <th>System</th>
+                            </tr>
+                            <tr>
+                                <td>Merklin</td>
+                                <td>Fighter</td>
+                                <td>8</td>
+                                <td>Wrath of Domescus</td>
+                                <td>D&D 5E</td>
+                            </tr>
+                            <tr>
+                                <td>Samsun</td>
+                                <td>Bard</td>
+                                <td>4</td>
+                                <td>Attack on Valeholm</td>
+                                <td>D&D 5E</td>
+                            </tr>
+                            <tr>
+                                <td>Poralius</td>
+                                <td>Paladin</td>
+                                <td>19</td>
+                                <td>The World Ender</td>
+                                <td>Pathfinder</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Upcoming Sessions</h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list-unstyled">
+                            <li>June 4 2015 <span title="Good to go" class="label label-success"><span class="glyphicon glyphicon-ok"></span></span></li>
+                            <li>July 14 2015 <span title="Tyler cannot make it" class="label label-danger"><span class="glyphicon glyphicon-remove"></span></span></li>
+                            <li>July 20 2015</li>
+                            <li>August 28 2015</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Friends</h3>
+                    </div>
+                    <div class="panel-body">
+                        <em>List of user's friends</em>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">News</h3>
+                    </div>
+                    <div class="panel-body">
+                        <em>List updates from GMs and friends</em>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <em>A small calendar visualizing the currnet month</em>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>

@@ -38,8 +38,16 @@
 <template name="navbar_logged_in">
     <ul class="nav navbar-nav">
         <li class="active"><a href="#">Campaigns</a></li>
-        <li><a href="#">Characters</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Characters <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="#">List Characters</a></li>
+                <li><a href="#">Create New Character</a></li>
+                <li><a href="#">Create New Character Template</a></li>
+            </ul>
+        </li>
         <li><a href="#">Monsters</a></li>
+        <li><a href="#">Items</a></li>
         <li><a href="#">Tools</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
