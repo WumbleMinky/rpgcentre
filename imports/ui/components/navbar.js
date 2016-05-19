@@ -11,4 +11,17 @@ Template.navbar.events({
         event.preventDefault();
         Meteor.logout();
     },
+    'shown.bs.modal #registration-modal': function(event){
+        Session.set('registerModalOpen', true);
+    },
+    'hidden.bs.modal #registration-modal': function(event){
+        Session.set('registerModalOpen', false);
+        delete Session.keys['registerModalOpen'];
+    }
+});
+
+Template.navbar.helpers({
+    noUserOrOpenModal: function(){
+        return Session.get('registerModalOpen') || !Meteor.user()
+    }
 });
