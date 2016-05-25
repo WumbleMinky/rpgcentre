@@ -1,20 +1,29 @@
 <template name="new_character_template">
     <h3>Create a new Character Template</h3>
-    <form class="form-horizontal" role="form">
+    <form class="form-horizontal" role="form" id="character_template_form">
+            <input type="hidden" id="template_id"/>
             <div class="form-group">
-                <label for="system_name" class="col-md-2 control-label">System Name:</label>
+                <label for="template_name" class="col-md-2 control-label">Template Name:</label>
+                <div class="col-md-4">
+                    <input type="text" name="template_name" class="form-control" placeholder="Template Name" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="system_name" class="col-md-2 control-label">System:</label>
                 <div class="col-md-4">
                     <input type="text" id="system_name" name="system_name" class="form-control" placeholder="System" list="system_list">
                 </div>
-                <div class="col-md-4">
+            </div>
+            <div class="form-group">
+                <div class="col-md-4 col-md-offset-2">
                     <button type="submit" class="btn btn-default">Save</button>
                     <button type="button" class="btn btn-default">Edit Layout</button>
                 </div>
             </div>
             <datalist id="system_list">
-                <option>Dungeons & Dragons: 5th Edition</option>
-                <option>Pathfinder</option>
-                <option>Shadowrun</option>
+                {{#each system in getSystems}}
+                    <option>{{system.name}}</option>
+                {{/each}}
             </datalist>
             <div class="form-group">
                 <button id="add_section" type="button" class="btn btn-default">Add Section</button>
@@ -27,9 +36,9 @@
 
 <template name="fieldRow">
     <tr>
-        <td><input type="text" name="field_name" class="form-control" placeholder="Field Name"/></td>
+        <td><input type="text" name="field_name" class="form-control js-field-name" placeholder="Field Name"/></td>
         <td>
-            <select class="form-control">
+            <select class="form-control" name="field_type">
                 <option value="text">Text</option>
                 <option value="bool">Boolean</option>
                 <option value="number">Number</option>
@@ -43,10 +52,10 @@
 
 <template name="sectionPanel">
     <div class="col-md-6">
-        <div class="panel panel-default">
+        <div class="panel panel-default js-section">
             <div class="panel-heading clearfix">
                 <div class="col-md-6">
-                    <input type="text" name="section_name" class="form-control" placeholder="Section Name"/>
+                    <input type="text" name="section_name" class="form-control js-section-name" placeholder="Section Name"/>
                 </div>
                 <div class="pull-right">
                     <button type="button" class="btn btn-default js-add-field">Add Field</button>
@@ -64,7 +73,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{> fieldRow}}
+                        <!-- This is where additional fields are inserted -->
                     </tbody>
                 </table>
             </div>
