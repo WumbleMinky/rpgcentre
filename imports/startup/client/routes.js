@@ -6,21 +6,24 @@ import '../../ui/pages/app_home.js';
 import '../../ui/pages/user_dashboard.js';
 import '../../ui/pages/new_character_template.js';
 
-FlowRouter.route('/dashboard', {
-    name: '/dashboard',
+var publicRoutes = FlowRouter.group({name:"public"});
+var loggedInRoutes = FlowRouter.group({name:'private'})
+
+loggedInRoutes.route('/dashboard', {
+    name: 'dashboard',
     action(){
         BlazeLayout.render('App_body', { main: 'user_dashboard' } );
     }
-})
+});
 
-FlowRouter.route('/', {
+publicRoutes.route('/', {
     name: 'home',
     action(){
         BlazeLayout.render('App_body', { main: 'app_home' } );
     }
 });
 
-FlowRouter.route('/character/template/new', {
+loggedInRoutes.route('/character/template/new', {
     name: 'New Character Template',
     action(){
         BlazeLayout.render('App_body', { main: 'new_character_template'});

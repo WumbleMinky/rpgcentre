@@ -1,0 +1,30 @@
+<template name="loginAndRegister">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-6"  style="border-right: 2px solid #EEE">
+                                Login
+                            </div>
+                            <div class="col-md-6">
+                                <span class="pull-right">Register</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6" style="border-right: 2px inset #EEE">
+                                {{> loginForm}}
+                            </div>
+                            <div class="col-md-6">
+                                {{> registrationForm}}
+                            </div>
+        				 </div>
+    				 </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

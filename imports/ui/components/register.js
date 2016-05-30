@@ -19,7 +19,7 @@ $.validator.addMethod('emailUnique', function(email) {
     return Session.get('uniqueEmail');
 })
 
-Template.registration.events({
+Template.registrationForm.events({
     'submit form': function(event){
         event.preventDefault();
         var email = event.target.registerEmail.value;
@@ -40,7 +40,7 @@ Template.registration.events({
     }
 });
 
-Template.registration.onRendered(function(){
+Template.registrationForm.onRendered(function(){
     $('.register').validate({
         rules: {
             registerEmail: { 

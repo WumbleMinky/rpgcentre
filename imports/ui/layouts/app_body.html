@@ -1,5 +1,87 @@
 <template name="App_body">
     <h1>Welcome to RPG Centre</h1>
-    {{> navbar}}
-    {{> Template.dynamic template=main}}
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">RPG Centre</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                {{#if noUserOrOpenModal}}
+                    <!-- Public Navbar -->
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/">Home <span class="sr-only">(current)</span></a></li>
+                        <li><a href="/about">About</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#" id="signup" data-toggle="modal" data-target="#registration-modal">Sign Up</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+                    		<ul id="login-dp" class="dropdown-menu">
+                    		    <li>
+                    			    <div class="row">
+                                        {{> loginForm}}
+                                    </div>
+                                    <div class="bottom text-center">
+                						New here ? <a href="#" data-toggle="modal" data-target="#registration-modal"><b>Sign Up</b></a>
+                					</div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    {{> registrationFormModal}}
+                    <!-- /Public Navbar -->
+                {{else}}
+                    <!-- Logged In Navbar -->
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Campaigns</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Characters <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">List Characters</a></li>
+                                <li><a href="#">Create New Character</a></li>
+                                <li><a href="/character/template/new">Create New Character Template</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Monsters</a></li>
+                        <li><a href="#">Items</a></li>
+                        <li><a href="#">Tools</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                {{currentUser.username}} <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/dashboard">Dashboard</a></li>
+                                <li><a href="#">Account Settings</a></li>
+                                <li><a href="#">Preferences</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#" class="logout">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- /Logged In Navbar -->
+                {{/if}}
+            </div>
+        </div>
+    </nav>
+    
+    {{#if publicPageOrUser}}
+        {{#if Template.subscriptionsReady}}
+            {{> Template.dynamic template=main}}
+        {{/if}}
+    {{else}}
+        Please login...
+        {{> loginAndRegister}}
+    {{/if}}
 </template>

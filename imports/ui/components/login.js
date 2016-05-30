@@ -2,7 +2,7 @@ import { Template } from 'meteor/templating';
 
 import './login.html';
 
-Template.loginButton.events({
+Template.loginForm.events({
     'submit form': function(event){
         event.preventDefault();
         var email = event.target.loginEmail.value;
@@ -17,7 +17,7 @@ Template.loginButton.events({
     },
 });
 
-Template.loginButton.helpers({
+Template.loginForm.helpers({
   loginErrorMessage: function(){
     return Session.get('loginErrorMessage');
   }

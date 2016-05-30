@@ -1,38 +1,42 @@
-<template name="registration">
+<template name="registrationFormModal">
   <div class="modal fade" id="registration-modal" tabindex="-1" role="dialog" aria-labelledby="registration-modal-label">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <form class="register" id="register-user-form" action="#" method="post">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="registration-modal-label">Register</h4>
         </div>
         <div class="modal-body">
-            <div class="form-group">
-              <input type="text" class="form-control" name="registerUsername" placeholder="Username" />
-            </div>
-            <div class="form-group">
-              <input type="email" class="form-control" name="registerEmail" placeholder="Email" />
-            </div>
-            <div class="row">
-              {{> register_password type="password" name="registerPassword" placeholder="Password"}}
-              {{> register_password type="password" name="registerConfirmPassword" placeholder="Confirm Password"}}
-            </div>
+          {{> registrationForm}}
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <input type="submit" class="btn btn-primary" value="Sign Up" />
-        </div>
-        </form>
       </div>
     </div>
   </div>
 </template>
 
+<template name="registrationForm">
+            <form class="register" id="register-user-form" action="#" method="post">
+              <div class="form-group">
+                 <input type="text" class="form-control" name="registerUsername" placeholder="Username" />
+              </div>
+              <div class="form-group">
+                  <input type="email" class="form-control" name="registerEmail" placeholder="Email" />
+              </div>
+              <div class="form-group">
+                  <input type="password" class="form-control" name="registerPassword" id="registerPassword" placeholder="Password" />
+              </div>
+              <div class="form-group">
+                  <input type="password" class="form-control" name="registerConfirmPassword" id="registerConfirmPassword" placeholder="Confirm Password" />
+              </div>
+              <div class="form-group">
+                  <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+              </div>
+            </form>
+</template>
+
 <template name="register_password">
-  <div class="col-xs-12 col-sm-6 col-md-6">
-    <div class="form-group">
+    <label for="{{name}}" class="control-label col-md-2">{{placeholder}}</label>
+    <div class="col-md-4">
       <input type="{{type}}" class="form-control" name="{{name}}" id="{{name}}" placeholder="{{placeholder}}"/>
     </div>
-  </div>
 </template>
