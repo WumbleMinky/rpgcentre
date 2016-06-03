@@ -12,20 +12,27 @@ var loggedInRoutes = FlowRouter.group({name:'private'})
 loggedInRoutes.route('/dashboard', {
     name: 'dashboard',
     action(){
-        BlazeLayout.render('App_body', { main: 'user_dashboard' } );
+        BlazeLayout.render('app_body', { main: 'user_dashboard' } );
     }
 });
 
 publicRoutes.route('/', {
     name: 'home',
     action(){
-        BlazeLayout.render('App_body', { main: 'app_home' } );
+        BlazeLayout.render('app_body', { main: 'app_home' } );
+    }
+});
+
+publicRoutes.route('/about', {
+    name: 'about',
+    action(){
+        BlazeLayout.render('app_body', { main: 'app_home' } );
     }
 });
 
 loggedInRoutes.route('/character/template/new', {
     name: 'New Character Template',
     action(){
-        BlazeLayout.render('App_body', { main: 'new_character_template'});
+        BlazeLayout.render('app_body', { main: 'new_character_template'});
     }
 });

@@ -5,8 +5,9 @@ import { $ } from 'meteor/jquery'
 import './app_body.html';
 import '../components/loginAndRegister.js';
 
-Template.App_body.helpers({
+Template.app_body.helpers({
     publicPageOrUser: function(){
+        FlowRouter.watchPathChange();
         return FlowRouter.current().route.group.name == 'public' || Meteor.userId();
     },
     noUserOrOpenModal: function(){
@@ -14,7 +15,7 @@ Template.App_body.helpers({
     }
 });
 
-Template.App_body.events({
+Template.app_body.events({
     'click .logout': function(event){
         event.preventDefault();
         Meteor.logout();

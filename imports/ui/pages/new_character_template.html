@@ -1,23 +1,80 @@
 <template name="new_character_template">
     <h3>Create a new Character Template</h3>
+    
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+            <a href="#fields" aria-controls="home" role="tab" data-toggle="tab">Fields</a>
+        </li>
+        <li role="presentation">
+            <a href="#layout" id="layout-link" aria-controls="layout" role="tab" data-toggle="tab">Layout</a>
+        </li>
+    </ul>
+    
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="fields"> {{> fields_form}}</div>
+        <div role="tabpanel" class="tab-pane" id="layout"> {{> layout}} </div>
+    </div>
+
+</template>
+
+<template name="layout">
+    <div class="container">
+        <div class="col-md-4">
+            <h3>{{getTemplateName}}</h3>
+            {{getTemplateSystem}}
+            <dl>
+                {{#each section in getTemplateSections}}
+                    <dt>{{section.name}}</dt>
+                    <dd>
+                        <div class="list-group">
+                            {{#each field in section.fields}}
+                                {{> layout_field field=field}}
+                            {{/each}}
+                        </div>
+                    </dd>
+                {{/each}}
+            </dl>
+        </div>
+        <div class="col-md-8" id="template_page">
+            
+        </div>
+    </div>
+</template>
+
+<template name="layout_field">
+    <a class="list-group-item draggable_item">{{field.name}}</a>
+</template>
+
+<template name="drag_input">
+    <div style="{{style}}" name="{{text}}">
+        <p class="input-placeholder {{#if isSelected text}}selected{{/if}}">{{text}}</p>
+        <div class="settings-icon">
+            <span class="glyphicon glyphicon-cog"></span>
+        </div>
+        <div class="move-handler">
+            <span class="glyphicon glyphicon-move"></span>
+        </div>
+    </div>
+</template>
+
+<template name="fields_form">
     <form class="form-horizontal" role="form" id="character_template_form">
             <input type="hidden" id="template_id"/>
             <div class="form-group">
                 <label for="template_name" class="col-md-2 control-label">Template Name:</label>
                 <div class="col-md-4">
-                    <input type="text" name="template_name" class="form-control" placeholder="Template Name" />
+                    <input type="text" name="template_name" id="template_name" class="form-control" placeholder="Template Name" />
                 </div>
             </div>
             <div class="form-group">
                 <label for="system_name" class="col-md-2 control-label">System:</label>
                 <div class="col-md-4">
-                    <input type="text" id="system_name" name="system_name" class="form-control" placeholder="System" list="system_list">
+                        <input type="text" id="system_name" name="system_name" class="form-control" placeholder="System" list="system_list">
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-4 col-md-offset-2">
                     <button type="submit" class="btn btn-default">Save</button>
-                    <button type="button" class="btn btn-default">Edit Layout</button>
                 </div>
             </div>
             <datalist id="system_list">

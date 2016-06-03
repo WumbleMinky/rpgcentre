@@ -11,21 +11,7 @@ import '../imports/api/systems/systems_subscriptions.js';
 Meteor.startup(() => {
   // code to run on server at startup
   if (CharacterTemplates.find().count() === 0){
-      CharacterTemplates.insert({
-            system: 'Pathfinder',
-            userId: 'Billy',
-            fields: [{
-                section: 'Personal',
-                name: 'name',
-                type: 'text',
-                rules: '',
-            },{
-                section: 'Personal',
-                name: 'class',
-                type: 'text',
-                rules: ''
-            }]
-      })
+      
   }
   
   if (Systems.find().count() === 0){
