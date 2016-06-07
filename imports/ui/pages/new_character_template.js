@@ -31,6 +31,9 @@ Template.new_character_template.onCreated(function(){
 })
 
 Template.new_character_template.events({
+    'click .tab-content': function(event){
+        Session.set('selectedLayoutElement', undefined);
+    },
     'click #layout-link': function(event){
         Session.set('template_name', $('#template_name').val());
         Session.set('template_system', $('#system_name').val());
@@ -142,6 +145,13 @@ Template.new_character_template.onRendered(function(){
 
 // LAYOUT RELATED ==========================
 
+function adjustLayoutPageSize(){
+    var temp = $('#template_page');
+    var width = temp.width();
+    var height = width * 1.29;
+    temp.height(height);
+}
+
 Template.layout.onRendered(function(){
     $('#template_page').droppable( {
         accept: '.draggable_item',
@@ -159,11 +169,20 @@ Template.layout.onRendered(function(){
             ui.draggable.draggable( 'disable' );
         }
     });
+    
+    // Quickly show the Layout Tab, then calculate & adjust the height of the page div, and switch back to the default fields tab
+    $('#layout-link').tab('show');
+    adjustLayoutPageSize();
+    $('#fields-link').tab('show');
+    $(window).resize(function(){
+        adjustLayoutPageSize();
+    })
 })
 
 Template.layout.events({
-    'click p.input-placeholder': function(event){
-        Session.set('selectedLayoutElement', $(event.target).text());
+    'click .input-placeholder': function(event){
+        Session.set('selectedLayoutElement', $(event.currentTarget).find('p').text());
+        event.stopPropagation();
     }
 });
 
@@ -180,6 +199,19 @@ Template.layout.helpers({
 })
 
 // LAYOUT FIELD RELATED ======================
+
+Template.layout_field.events({
+    'click .draggable_item.ui-draggable-disabled': function(event){
+        event.stopPropagation();
+        Session.set('selectedLayoutElement', $(event.target).text());
+    },
+});
+
+Template.layout_field.helpers({
+    isSelected(text){
+        return Session.equals('selectedLayoutElement', text);
+    },
+});
 
 Template.layout_field.onRendered(function(){
     //make this field item draggable
@@ -203,15 +235,23 @@ Template.layout_field.onDestroyed(function(){
 // DRAG INPUT RELATED ============================
 
 Template.drag_input.onRendered(function(){
-    console.log("Rendered!!");
-    $(this.find('div')).draggable({
+    var div = $(this.find('div'));
+    div.draggable({
         containment: 'parent',
         handle: '.move-handler'
     });
+    div.resizable({
+        containment: 'parent',
+        handles:{ se: '.size-handler' },
+    });
+    //This is a fix to stop the resize event from propgating past this <div>
+    div.on('resize', function(event){
+        event.stopPropagation();
+    })
 });
 
 Template.drag_input.helpers({
     isSelected(text){
         return Session.equals('selectedLayoutElement', text);
-    }
+    },
 })

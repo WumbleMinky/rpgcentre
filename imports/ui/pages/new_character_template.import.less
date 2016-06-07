@@ -1,29 +1,52 @@
+:root{
+    --selected-color: deepskyblue;
+    --box-shadow-color: #888;
+}
 .move-handler {
     position:absolute;
-    bottom:0px;
-    right:-5px;
+    left:-10px;
+    top:-10px;
 }
 
 .settings-icon {
     position:absolute;
-    right:-5px;
+    right:-10px;
     top:-10px;
+}
+.size-handler {
+    position:absolute;
+    right: -10px;
+    bottom: -10px;
 }
 .input-placeholder {
     width: auto;
     white-space: nowrap;
     border: 1px solid #EEE;
+    padding: 1px;
 }
 .input-placeholder:hover{
-    border: 1px solid #33D;
+    padding: 0px;
+    border: 2px solid #888;
 }
 .input-placeholder.selected{
-    border: 1px dashed #D33;
+    border: 2px solid var(--selected-color);
+    padding: 0px;
+}
+.draggable_item.selected{
+    --box-shadow-color: var(--selected-color);
+    border-color: var(--selected-color);
+    background-color: rgba(0, 191, 255, 0.05);
 }
 #layout .container {
     margin-left: 20px;
 }
-#layout #template_page{
-    height:400px;
+#template_page{
     border:1px solid black;
+    height: 600px;
+}
+.draggable_item{
+    box-shadow: 1px 1px 1px var(--box-shadow-color);
+}
+#fields_list a.ui-draggable-disabled{
+    box-shadow: inset 1px 1px 1px var(--box-shadow-color);
 }
