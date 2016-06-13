@@ -20,6 +20,14 @@ function validateWithMultiFields(){
     });
 }
 
+function getSelectedElement(){
+    return getLayoutElement(Session.get('selectedLayoutElement'));
+}
+
+function getLayoutElement(name){
+    return $('#layout div[name="' + name + '"]')
+}
+
 // NEW CHARACTER TEMPLATE RELATED =========
 
 Template.new_character_template.onCreated(function(){
@@ -33,6 +41,7 @@ Template.new_character_template.onCreated(function(){
 Template.new_character_template.events({
     'click .tab-content': function(event){
         Session.set('selectedLayoutElement', undefined);
+        $('#element_menu').hide()
     },
     'click #layout-link': function(event){
         Session.set('template_name', $('#template_name').val());
@@ -176,12 +185,14 @@ Template.layout.onRendered(function(){
     $('#fields-link').tab('show');
     $(window).resize(function(){
         adjustLayoutPageSize();
-    })
+    });
+    $('#element_menu').menu();
 })
 
 Template.layout.events({
     'click .input-placeholder': function(event){
         Session.set('selectedLayoutElement', $(event.currentTarget).find('p').text());
+        $('#element_menu').hide();
         event.stopPropagation();
     }
 });
@@ -229,7 +240,7 @@ Template.layout_field.onRendered(function(){
 Template.layout_field.onDestroyed(function(){
     //remove the Draggable layout element associated with this field
     var text = this.$('.draggable_item').text();
-    $('#layout div[name="' + text + '"').remove();
+    getLayoutElement(text).remove();
 });
 
 // DRAG INPUT RELATED ============================
@@ -254,4 +265,59 @@ Template.drag_input.helpers({
     isSelected(text){
         return Session.equals('selectedLayoutElement', text);
     },
+});
+
+Template.drag_input.events({
+    'click .settings-icon': function(event){
+        event.stopPropagation();
+        $('#element_menu').toggle().position({ 
+            my: "left top",
+            at: "right top",
+            of: $(event.target),
+            collision: "fit flip",
+        });
+    },
+    'mousedown .move-handler, mousedown .size-handler': function(event){
+        $('#element_menu').hide();
+    }
+})
+
+// ELEMENT MENU 
+
+Template.element_menu.onRendered(function(){
+    Session.set('showAddLabel', true);
+})
+
+Template.element_menu.events({
+    'click #remove_link': function(event){
+        getSelectedElement().remove();
+        $('#fields_list a.selected').draggable('enable');
+        Session.set('selectedLayoutElement', undefined);
+        $('#element_menu').hide();
+    },
+    'click a#add_label_link': function(event){
+        var selected_elem = getSelectedElement();
+        
+        var name = selected_elem.attr('name') + '_label';
+        
+        Blaze.renderWithData(Template.drag_input, {style:'position:absolute;', text: name}, $('#template_page').get(0));
+        var label_elem = getLayoutElement(name);
+        label_elem.position({
+            my: 'left top',
+            at: 'left+10 top+10',
+            of: $('#template_page'),
+            collision: 'fit flip',
+        })
+        
+    },
+});
+
+Template.element_menu.helpers({
+    showAddLabel(){
+        var selected_name = Session.get('selectedLayoutElement');
+        if (selected_name != undefined && (selected_name.endsWith('_label') || getLayoutElement(selected_name + '_label').length != 0)){
+            return false;
+        }
+        return true;
+    }
 })
